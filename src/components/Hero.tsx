@@ -6,18 +6,10 @@ import { useEffect, useState } from "react";
 
 export const Hero = () => {
   const { ref, isVisible } = useScrollReveal<HTMLElement>({ threshold: 0.1 });
-  const [scrollY, setScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
-
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -27,19 +19,18 @@ export const Hero = () => {
     >
       {/* Hero background with slow zoom and parallax */}
       <div
-        className={`absolute inset-0 bg-cover bg-center ${
-          isLoaded ? "hero-zoom" : ""
-        }`}
-        style={{
-          backgroundImage: `url(${heroImage})`,
-          transform: `translateY(${scrollY * 0.3}px) scale(1)`,
-          transformOrigin: "center center",
-        }}
-        role="img"
-        aria-label="Jenny's Cafe interior with welcoming atmosphere"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/90 via-secondary/80 to-secondary/70" />
-      </div>
+  className={`absolute inset-0 bg-cover bg-center hero-kenburns ${
+    isLoaded ? "" : ""
+  }`}
+  style={{
+    backgroundImage: `url(${heroImage})`,
+    transformOrigin: "center center",
+  }}
+  role="img"
+  aria-label="Jenny's Cafe interior with welcoming atmosphere"
+>
+  <div className="absolute inset-0 bg-gradient-to-b from-secondary/90 via-secondary/80 to-secondary/70" />
+</div>
 
       {/* Hero content with staggered reveal */}
       <div className="relative z-10 container mx-auto px-6 text-center max-w-6xl py-40 md:py-48">
@@ -124,7 +115,7 @@ export const Hero = () => {
           }`}
         >
           <a
-            href="https://deliveroo.co.uk/menu/reading/aldershot/jennys-cafe-and-restaurant"
+            href="https://deliveroo.co.uk/menu/camberley/aldershot/jennys-cafe-wellington-street?srsltid=AfmBOoo-uI0GjuxJVPfrIUP_G_u_UOIRJQbwfl_-1c7liZyhBjS-AApF"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center px-7 py-4 bg-white hover:bg-white/95 text-foreground rounded-xl font-semibold text-base transition-all duration-300 hover:scale-105 hover:shadow-xl shadow-lg"
