@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastY, setLastY] = useState(0);
-
+  const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
@@ -24,7 +26,18 @@ export const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastY]);
 
-  const scrollToSection = (id: string) => {
+  const goToSection = (id: string) => {
+    // If we're not on the homepage, go home first, then scroll
+    if (location.pathname !== "/") {
+      navigate("/");
+      // wait a tick so the home sections exist in the DOM
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 50);
+      return;
+    }
+
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
@@ -42,7 +55,14 @@ export const Navigation = () => {
           
           {/* Logo */}
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                        onClick={() => {
+                          if (location.pathname !== "/") {
+                            navigate("/");
+                            setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 50);
+                            return;
+                          }
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
             className="font-serif text-2xl font-bold hover:text-primary transition-colors"
           >
             <span className={`transition-colors duration-700 ${isScrolled ? "text-foreground" : "text-white"}`}>
@@ -53,7 +73,7 @@ export const Navigation = () => {
           {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-8">
             <button
-              onClick={() => scrollToSection("about")}
+               onClick={() => goToSection("about")}
               className={`text-base font-medium transition-all duration-700 hover:text-primary ${
                 isScrolled ? "text-foreground" : "text-white"
               }`}
@@ -62,7 +82,7 @@ export const Navigation = () => {
             </button>
 
             <button
-              onClick={() => scrollToSection("menu")}
+                            onClick={() => goToSection("menu")}
               className={`text-base font-medium transition-all duration-700 hover:text-primary ${
                 isScrolled ? "text-foreground" : "text-white"
               }`}
@@ -71,7 +91,7 @@ export const Navigation = () => {
             </button>
 
             <button
-              onClick={() => scrollToSection("contact")}
+                            onClick={() => goToSection("contact")}
               className={`text-base font-medium transition-all duration-700 hover:text-primary ${
                 isScrolled ? "text-foreground" : "text-white"
               }`}

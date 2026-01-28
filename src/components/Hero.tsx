@@ -4,6 +4,7 @@ import heroImage from "@/assets/jennys-hero.jpg";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { useEffect, useState } from "react";
 
+
 export const Hero = () => {
   const { ref, isVisible } = useScrollReveal<HTMLElement>({ threshold: 0.1 });
   const [isLoaded, setIsLoaded] = useState(false);
@@ -96,16 +97,16 @@ export const Hero = () => {
             </a>
           </Button>
           <Button
-            size="lg"
-            variant="outline"
-            className="border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-secondary font-semibold px-10 py-8 text-lg transition-all duration-300 hover:scale-105"
-            asChild
+             size="lg"
+             variant="outline"
+             className="border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-secondary font-semibold px-10 py-8 text-lg transition-all duration-300 hover:scale-105"
+              asChild
           >
-            <a href="#menu">
-              <UtensilsCrossed className="mr-2 h-5 w-5" />
-              View Menu
-            </a>
-          </Button>
+           <a href="#menu">
+        <UtensilsCrossed className="mr-2 h-5 w-5" />
+          View Menu
+           </a>
+            </Button>
         </div>
 
         {/* Delivery links */}

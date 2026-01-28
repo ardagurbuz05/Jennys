@@ -1,12 +1,15 @@
 import { Card } from "@/components/ui/card";
 import breakfastImg from "@/assets/breakfast-special.jpg";
-import burgerImg from "@/assets/burger-meal.jpg";
-import pancakeImg from "@/assets/breakfast-pancakes.jpeg"
-import chefImg from "@/assets/chef-table.jpeg"
-import sandwichImg from "@/assets/sandwich.jpeg"
-import kidsImg from "@/assets/kids.jpeg"
-import wrapImg from "@/assets/wraps.jpeg"
-import mediterraneanImg from "@/assets/mediterranean-specials.jpeg";
+import burgerImg from "@/assets/epic-burger.jpeg";
+import pancakeImg from "@/assets/breakfast-pancakes.jpeg";
+import chefImg from "@/assets/chef-table.jpeg";
+import sandwichImg from "@/assets/sandwich.jpeg";
+import kidsImg from "@/assets/kids.jpeg";
+import wrapImg from "@/assets/wraps.jpeg";
+import omeletteImg from "@/assets/omelette.jpeg";
+import sweetImg from "@/assets/sweet-treats.jpeg";
+import potatoImg from "@/assets/jacket-potato.jpeg";
+import mediterraneanImg from "@/assets/mediterraneanS.jpeg";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 interface MenuItem {
@@ -120,6 +123,7 @@ const menuCategories: MenuCategory[] = [
 
   {
     name: "Jacket Potatoes",
+    image: potatoImg,
     items: [
       { name: "Butter (V)", desc: "Classic baked jacket potato with butter." },
       { name: "Cheese (V)", desc: "Jacket potato with melted cheese." },
@@ -133,6 +137,7 @@ const menuCategories: MenuCategory[] = [
 
   {
     name: "Omelettes",
+    image: omeletteImg,
     items: [
       { name: "Plain Omelette (V)", desc: "3-egg omelette served with baked beans, fries or salad." },
       {
@@ -246,6 +251,7 @@ const menuCategories: MenuCategory[] = [
 
   {
     name: "Sweet Treats",
+    image: sweetImg,
     items: [
       {
         name: "Sweet Pancake Stack",
@@ -277,11 +283,11 @@ const MenuCategoryCard = ({ category, index }: MenuCategoryCardProps) => {
 
   return (
     <Card
-      ref={ref}
-      className={`w-full overflow-hidden shadow-card hover-lift reveal-scale ${staggerClass} ${
-        isVisible ? "reveal-scale-visible" : ""
-      } bg-card`}
-    >
+  ref={ref}
+  className={`w-full overflow-hidden shadow-card hover-lift bg-card reveal ${
+    isVisible ? "reveal-visible" : ""
+  } ${staggerClass}`}
+>
       {category.image && (
         <div className="h-56 overflow-hidden">
           <img
@@ -318,8 +324,42 @@ const MenuCategoryCard = ({ category, index }: MenuCategoryCardProps) => {
   );
 };
 
-export const Menu = () => {
+export const Menu = ({
+  section = "breakfast",
+}: {
+  section?: "breakfast" | "lunch" | "dessert";
+}) => {
   const { ref: titleRef, isVisible: titleVisible } = useScrollReveal();
+  const sectionTitles: Record<"breakfast" | "lunch" | "dessert", string> = {
+    breakfast: "Breakfast",
+    lunch: "Lunch",
+    dessert: "Desserts",
+  };
+  
+  const sections: Record<"breakfast" | "lunch" | "dessert", string[]> = {
+    breakfast: [
+      "All Day Breakfast",
+      "Mediterranean Specials",
+      "Breakfast Classics",
+      "Breakfast Pancakes",
+      "Omelettes"
+    ],
+    lunch: [
+      "Chef’s Table",
+      "Epic Burgers",
+      "Jacket Potatoes",
+      "Salads",
+      "Sandwiches",
+      "Baguette & Wrap Meals",
+      "Toasted Sandwich Meals",
+      "Kids’ Favourites",
+    ],
+    dessert: ["Sweet Treats"],
+  };
+  
+  const visibleCategories = menuCategories.filter((c) =>
+    sections[section].includes(c.name)
+  );
 
   return (
     <section className="py-40 bg-muted/20" id="menu">
@@ -335,17 +375,17 @@ export const Menu = () => {
           </h2>
           <div className="w-32 h-1.5 bg-primary mx-auto mb-10" />
           <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-light">
-            A selection from our menu — ask in-store for the full menu and today’s pricing.
+          Explore our {sectionTitles[section]} selection — ask in-store for the full menu and today’s pricing.
           </p>
         </div>
-
-        <div className="columns-1 lg:columns-2 gap-10">
-  {menuCategories.map((category, idx) => (
-    <div key={category.name} className="mb-10 break-inside-avoid">
-      <MenuCategoryCard category={category} index={idx} />
-    </div>
+        <div className="columns-1 lg:columns-2 [column-gap:2.5rem]">
+  {visibleCategories.map((category, idx) => (
+    <div key={category.name} className="mb-10 break-inside-avoid w-full">
+    <MenuCategoryCard category={category} index={idx} />
+  </div>
   ))}
 </div>
+     
 
         <div className="text-center mt-20 space-y-5 max-w-4xl mx-auto">
           <p className="text-lg text-muted-foreground">
