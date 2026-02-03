@@ -1,6 +1,7 @@
 import { Award } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import heroFood from "@/assets/hero-food.jpg";
+import aboutImg from "@/assets/about-frontWW.jpeg";
 import { useEffect, useState } from "react";
 
 export const About = () => {
@@ -42,6 +43,13 @@ export const About = () => {
           </h2>
           <div className="w-32 h-1.5 bg-primary mx-auto" />
         </div>
+        <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen mb-14">
+        <img
+         src={aboutImg}
+         alt="Jenny's Café"
+         className="w-full h-[420px] md:h-[520px] object-cover object-[50%_40%] rounded-2xl shadow-lg mb-10"
+       />
+       </div>
 
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <div

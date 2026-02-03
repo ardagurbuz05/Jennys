@@ -1,5 +1,6 @@
 import { MapPin, Clock, Phone } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import visitImg from "@/assets/visit-frontWW.jpeg";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const contactInfo = [
@@ -47,7 +48,14 @@ export const Contact = () => {
             welcome and delicious food
           </p>
         </div>
-
+        <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen mb-16">
+  <img
+    src={visitImg}
+    alt="Jenny's Café front"
+    className="w-full h-[360px] md:h-[520px] object-cover"
+    loading="lazy"
+  />
+</div>
         <div
           className="grid md:grid-cols-3 gap-10 mb-20"
           ref={cardsRef}
