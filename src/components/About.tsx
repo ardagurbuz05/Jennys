@@ -76,15 +76,24 @@ export const About = () => {
               here to welcome you with a smile and serve you something delicious.
             </p>
 
-            <div className="pt-8 flex items-center gap-4 bg-primary/5 rounded-2xl p-6">
-              <Award className="w-8 h-8 text-primary flex-shrink-0" />
-              <span className="text-lg text-muted-foreground">
-                Food Hygiene Rating:{" "}
-                <span className="font-bold text-foreground">
-                  Good (Rushmoor)
-                </span>
-              </span>
-            </div>
+            <div className="pt-8 bg-primary/5 rounded-2xl p-6">
+  <div className="flex items-center gap-4">
+    <Award className="w-8 h-8 text-primary flex-shrink-0" />
+    <span className="text-lg text-muted-foreground">
+      Food Hygiene Rating:{" "}
+      <span className="font-bold text-foreground">5 (Very Good)</span>
+    </span>
+  </div>
+
+  <a
+    href="https://ratings.food.gov.uk/business-search?business-name-search=Jenny%E2%80%99s+Cafe&address-search=Aldershot&business_type=-1&country_or_la=all&hygiene_rating=all&range=Equal&hygiene_status=all"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="mt-4 inline-flex items-center justify-center px-5 py-3 bg-secondary text-secondary-foreground font-semibold text-sm rounded-xl hover:bg-secondary/90 transition-all duration-300 hover:scale-[1.02] shadow-sm"
+  >
+    View Food Hygiene Rating
+  </a>
+</div>
           </div>
 
           <div

@@ -4,7 +4,7 @@ import burgerImg from "@/assets/epic-burger.jpeg";
 import pancakeImg from "@/assets/breakfast-pancakes.jpeg";
 import chefImg from "@/assets/chef-table.jpeg";
 import sandwichImg from "@/assets/sandwich.jpeg";
-import kidsImg from "@/assets/kids.jpeg";
+import kidsImg from "@/assets/kids-menu.jpeg";
 import wrapImg from "@/assets/wraps.jpeg";
 import omeletteImg from "@/assets/omelette.jpeg";
 import sweetImg from "@/assets/sweet-treats.jpeg";
